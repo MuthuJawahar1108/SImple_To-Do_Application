@@ -44,12 +44,8 @@
 
         const getTaskContent = () => {
             const taskbox = document.getElementById("taskbox");
-            // console.log(tasks);
             tasks.push({"task":taskbox.value,"status":"incomplete"});
-            // console.log(tasks);
-            // addBox(taskbox.value);
             checkArray();
-            // console.log(tasks);
 
         }
 
@@ -58,7 +54,10 @@
             let cloneBox = originalBox.cloneNode(true); //true for producing deep clone
             cloneBox.querySelector("#descriptionPara").textContent=text;
             document.getElementsByClassName("boxes-container")[0].appendChild(cloneBox);
+
         }
+
+        
 
         let isDone = document.getElementById("isDone");
         
@@ -78,11 +77,6 @@
         const checkArray = () => {
             if(tasks.length==0)
             {
-                // let emptyPara = document.createElement("p");
-                // emptyPara.textContent = "No tasks right now!!";
-                // let toReplace = document.getElementsByClassName("box")[0];
-                // toReplace.parentNode.replaceChild(emptyPara,toReplace);
-                // let box = document.getElementsByClassName("box")[0];
                 emptyText.style.removeProperty("display");
                 box.style.display="none";
             } 
@@ -102,18 +96,12 @@
                     descriptionPara.textContent=tasks[0].task;
                     console.log(tasks)
 
-                    tasks.map((value)=>{
-                        // let cloneBox = originalBox.cloneNode(true); //true for producing deep clone
-                        // cloneBox.querySelector("#descriptionPara").textContent=value;
-                        // document.getElementsByClassName("boxes-container")[0].appendChild(cloneBox);
-                        // descriptionPara.textContent=tasks[value].task;
+                    tasks.slice(1).map((value)=>{
+                        
                         addBox(value.task);
                     });
             }
-            // else{
-            //     let emptyText = document.getElementsByClassName("hiddenText")[0];
-            //     emptyText.style.display="none";
-            // }
+
         }
 
         checkArray();
