@@ -40,12 +40,13 @@
     </div>
     <script>
         let tasks = [];
-
+        let box = document.getElementsByClassName("box")[0]; 
+        const boxModel = box;
 
         const getTaskContent = () => {
             const taskbox = document.getElementById("taskbox");
             tasks.push({"task":taskbox.value,"status":"incomplete"});
-            checkArray();
+            checkArray(0);
 
         }
 
@@ -104,11 +105,14 @@
         })
         
 
-        let box = document.getElementsByClassName("box")[0];
+        //let box = document.getElementsByClassName("box")[0];
         let emptyText = document.getElementsByClassName("hiddenText")[0];
-        const checkArray = () => {
-            if(tasks.length==0)
+        const checkArray = (isBegin) => {
+            if(tasks.length===0)
             {
+                // if(!isBegin){
+                //     boxContainer.appendChild(box);
+                // }
                 emptyText.style.removeProperty("display");
                 box.style.display="none";
             } 
@@ -116,6 +120,10 @@
     
                     // let box = document.getElementsByClassName("box")[0];
                     // box.style.display="none";
+
+                    if(!isBegin){
+                        boxContainer.appendChild(box);
+                    }
                     emptyText.style.display="none";
                     box.style.removeProperty("display");
                     
@@ -136,7 +144,7 @@
 
         }
 
-        checkArray();
+        checkArray(1);
         
         const button = document.getElementById("submit");
         console.log(button);
