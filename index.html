@@ -91,7 +91,7 @@
                     return taskObject.task === currentTask.textContent;
                 });
                 if (index !== -1) {
-                        tasks.pop(index);
+                        tasks.splice(index,1);
                         currentBox.remove();
                         //currentTask.style.textDecoration = "line-through";
                         //currentTask.style.color = "#70706f";
@@ -102,43 +102,6 @@
 
             }
         })
-
-
-//         const handleCheckboxChange = (checkbox) => {
-//     if (checkbox.checked) {
-//         let currentTask = document.getElementById("descriptionPara");
-//         let index = tasks.findIndex((taskObject) => {
-//             return taskObject.task === currentTask.textContent;
-//         });
-//         if (index !== -1) {
-//             tasks[index].status = "complete";
-//             console.log(tasks)
-//             console.log("Index: " + index);
-//         } else {
-//             console.log("Task not found!");
-//         }
-//     }
-// }
-
-
-        // let isDone = document.getElementById("isDone");  
-        // isDone.addEventListener("change", () => {
-
-        //     if(isDone.checked){
-    
-        //         let currentTask = document.getElementById("descriptionPara");
-        //         let index = tasks.findIndex((taskObject) => {
-        //        return taskObject.task === currentTask.textContent;
-        //     });
-        //     if(index !== -1){
-        //         tasks[index].status = "complete";
-        //         console.log("Index"+index);
-        //     }
-        //      else console.log("Task not found!");
-        //     }
-        // })  ;
-            
-        
         
 
         let box = document.getElementsByClassName("box")[0];
@@ -155,8 +118,8 @@
                     // box.style.display="none";
                     emptyText.style.display="none";
                     box.style.removeProperty("display");
-                    // let emptyText = document.getElementsByClassName("hiddenText")[0];
-                    // emptyText.style.display="none";
+                    
+
                     let toDoDescription = document.getElementsByClassName("description")[0];
                     console.log(toDoDescription);
                     let descriptionPara = toDoDescription.querySelector("#descriptionPara"); 
