@@ -45,7 +45,13 @@
 
         const getTaskContent = () => {
             const taskbox = document.getElementById("taskbox");
-            tasks.push({"task":taskbox.value,"status":"incomplete"});
+            
+            //if(tasks.length===0)
+            //{
+            //    checkArray(1);
+            //}
+            tasks.push({"task":taskbox.value,"status":"incomplete"})
+            taskbox.value="";
             checkArray(0);
 
         }
@@ -122,6 +128,7 @@
                     // box.style.display="none";
 
                     if(!isBegin){
+                        emptyText.style.textDecoration="none";
                         boxContainer.appendChild(box);
                     }
                     emptyText.style.display="none";
