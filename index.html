@@ -13,17 +13,19 @@
     </div>
     <div class="boxes-container" >
         <p>Tasks to complete</p>
-        <p class="hiddenText">No tasks right now!!</p>
-        <div class="box" >
-            <div class="description">
-                <div class="round"></div>
-                <p id="descriptionPara"></p>
+        <p class="hiddenText"></p>
+        <template id="boxTemplate">
+            <div class="box" id="box">
+                <div class="description">
+                    <div class="round"></div>
+                    <p id="descriptionPara"></p>
+                </div>
+                <div class="controls">
+                    <input type="checkbox" name="isDone" id="isDone" value="false" >
+                    <div class="cancel"></div>
+                </div>
             </div>
-            <div class="controls">
-                <input type="checkbox" name="isDone" id="isDone" value="false" >
-                <div class="cancel"></div>
-            </div>
-        </div>
+        </template>
     </div>
     <div class="new-todo_container" >
         <!-- <div class="title-container">
@@ -39,123 +41,189 @@
         <!-- <div class="add-button">+</div> -->
     </div>
     <script>
-        let tasks = [];
-        let box = document.getElementsByClassName("box")[0]; 
-        const boxModel = box;
+        let tasks = [{"_id":1,"task":"Get ready for college","status":0},
+        {"_id":2,"task":"Get ready for home","status":0}];
 
-        const getTaskContent = () => {
-            const taskbox = document.getElementById("taskbox");
-            
-            //if(tasks.length===0)
-            //{
-            //    checkArray(1);
-            //}
-            tasks.push({"task":taskbox.value,"status":"incomplete"})
+        const boxTemplate = document.getElementById("boxTemplate");
+
+
+        // let tasks=[];
+        // const box = document.getElementById("box");
+        // box.remove();
+        const hiddenText = document.getElementsByClassName("hiddenText")[0];
+        const hidText = hiddenText;
+        // const boxModel = box;
+        hiddenText.remove();
+        // box.remove();
+        const boxContainer = document.getElementsByClassName("boxes-container")[0];
+
+        const createBox = (task) => {
+            // tasks.forEach((task)=>{
+                // console.log("Inside map");
+                
+                const boxClone = document.importNode(boxTemplate.content,true);
+                const descPara = boxClone.querySelector("#descriptionPara");
+                const checkbox = boxClone.querySelector('input[name="isDone"]');
+
+                descPara.textContent = task.task;
+                if(!task.status){
+                    descPara.style.textDecoration = "line-through";
+                    descPara.style.color="grey";
+                    checkbox.checked = true;
+                } 
+                boxContainer.appendChild(boxClone);
+                // console.log(boxClone);
+            // })
+        } 
+
+        if(tasks.length===0){
+            hidText.textContent="No tasks right now!!";
+            boxContainer.appendChild(hidText);
+        }
+        else{
+            tasks.forEach((task)=>{
+                createBox(task);
+            })
+        }
+        
+
+        let taskbox = document.getElementById("taskbox");
+        let checkBox = document.getElementById()
+        let submit = document.getElementById("submit");
+
+        submit.addEventListener("click",()=>{
+            let newTask = {"_id":3,"task":taskbox.value,"status":1};
+            tasks.push(newTask);
+            createBox(newTask);
             taskbox.value="";
-            checkArray(0);
-
-        }
-
-        const addBox = (text) => {
-            let originalBox = document.getElementsByClassName("box")[0];
-            let cloneBox = originalBox.cloneNode(true); //true for producing deep clone
-            cloneBox.querySelector("#descriptionPara").textContent=text;
-            document.getElementsByClassName("boxes-container")[0].appendChild(cloneBox);
-
-            
-            
-        }
-        
-        const boxContainer = document.querySelector('.boxes-container');
-        // Add an event listener for changes to "isDone" checkboxes using event delegation
-        boxContainer.addEventListener('change', (event) => {
-            if (event.target.matches('input[name="isDone"]')) {
-                const checkbox = event.target;
-                if (checkbox.checked) {
-                    let currentTask = checkbox.closest('.box').querySelector('#descriptionPara');
-                    let index = tasks.findIndex((taskObject) => {
-                        return taskObject.task === currentTask.textContent;
-                    });
-                    if (index !== -1) {
-                        tasks[index].status = "complete";
-                        currentTask.style.textDecoration = "line-through";
-                        currentTask.style.color = "#70706f";
-                        console.log("Index: " + index);
-                    } else {
-                        console.log("Task not found!");
-                    }
-                }
-            }
-    
-        });
-        boxContainer.addEventListener("click",(event)=>{
-            if(event.target.matches('div[class="cancel"]')){
-                console.log("Matched");
-                const cancelButton = event.target;
-                let currentBox = cancelButton.closest('.box');
-                let currentTask = cancelButton.closest('.box').querySelector('#descriptionPara');
-                let index = tasks.findIndex((taskObject) => {
-                    return taskObject.task === currentTask.textContent;
-                });
-                if (index !== -1) {
-                        tasks.splice(index,1);
-                        currentBox.remove();
-                        //currentTask.style.textDecoration = "line-through";
-                        //currentTask.style.color = "#70706f";
-                        //console.log("Index: " + index);
-                    } else {
-                        console.log("Task not found!");
-                    }
-
-            }
         })
+
+
+
+
+
+
+
+
+
+
+
+        // let box = document.getElementsByClassName("box")[0]; 
+        // const boxModel = box;
+
+        // const getTaskContent = () => {
+        //     const taskbox = document.getElementById("taskbox");
+            
+        //     //if(tasks.length===0)
+        //     //{
+        //     //    checkArray(1);
+        //     //}
+        //     tasks.push({"task":taskbox.value,"status":"incomplete"})
+        //     taskbox.value="";
+        //     checkArray(0);
+
+        // }
+
+        // const addBox = (text) => {
+        //     let originalBox = document.getElementsByClassName("box")[0];
+        //     let cloneBox = originalBox.cloneNode(true); //true for producing deep clone
+        //     cloneBox.querySelector("#descriptionPara").textContent=text;
+        //     document.getElementsByClassName("boxes-container")[0].appendChild(cloneBox);
+
+            
+            
+        // }
+        
+        // const boxContainer = document.querySelector('.boxes-container');
+        // // Add an event listener for changes to "isDone" checkboxes using event delegation
+        // boxContainer.addEventListener('change', (event) => {
+        //     if (event.target.matches('input[name="isDone"]')) {
+        //         const checkbox = event.target;
+        //         if (checkbox.checked) {
+        //             let currentTask = checkbox.closest('.box').querySelector('#descriptionPara');
+        //             let index = tasks.findIndex((taskObject) => {
+        //                 return taskObject.task === currentTask.textContent;
+        //             });
+        //             if (index !== -1) {
+        //                 tasks[index].status = "complete";
+        //                 currentTask.style.textDecoration = "line-through";
+        //                 currentTask.style.color = "#70706f";
+        //                 console.log("Index: " + index);
+        //             } else {
+        //                 console.log("Task not found!");
+        //             }
+        //         }
+        //     }
+    
+        // });
+        // boxContainer.addEventListener("click",(event)=>{
+        //     if(event.target.matches('div[class="cancel"]')){
+        //         console.log("Matched");
+        //         const cancelButton = event.target;
+        //         let currentBox = cancelButton.closest('.box');
+        //         let currentTask = cancelButton.closest('.box').querySelector('#descriptionPara');
+        //         let index = tasks.findIndex((taskObject) => {
+        //             return taskObject.task === currentTask.textContent;
+        //         });
+        //         if (index !== -1) {
+        //                 tasks.splice(index,1);
+        //                 currentBox.remove();
+        //                 //currentTask.style.textDecoration = "line-through";
+        //                 //currentTask.style.color = "#70706f";
+        //                 //console.log("Index: " + index);
+        //             } else {
+        //                 console.log("Task not found!");
+        //             }
+
+        //     }
+        // })
         
 
-        //let box = document.getElementsByClassName("box")[0];
-        let emptyText = document.getElementsByClassName("hiddenText")[0];
-        const checkArray = (isBegin) => {
-            if(tasks.length===0)
-            {
-                // if(!isBegin){
-                //     boxContainer.appendChild(box);
-                // }
-                emptyText.style.removeProperty("display");
-                box.style.display="none";
-            } 
-            else{
+        // //let box = document.getElementsByClassName("box")[0];
+        // let emptyText = document.getElementsByClassName("hiddenText")[0];
+        // const checkArray = (isBegin) => {
+        //     if(tasks.length===0)
+        //     {
+        //         // if(!isBegin){
+        //         //     boxContainer.appendChild(box);
+        //         // }
+        //         emptyText.style.removeProperty("display");
+        //         box.style.display="none";
+        //     } 
+        //     else{
     
-                    // let box = document.getElementsByClassName("box")[0];
-                    // box.style.display="none";
+        //             // let box = document.getElementsByClassName("box")[0];
+        //             // box.style.display="none";
 
-                    if(!isBegin){
-                        emptyText.style.textDecoration="none";
-                        boxContainer.appendChild(box);
-                    }
-                    emptyText.style.display="none";
-                    box.style.removeProperty("display");
+        //             if(!isBegin){
+        //                 emptyText.style.textDecoration="none";
+        //                 boxContainer.appendChild(box);
+        //             }
+        //             emptyText.style.display="none";
+        //             box.style.removeProperty("display");
                     
 
-                    let toDoDescription = document.getElementsByClassName("description")[0];
-                    console.log(toDoDescription);
-                    let descriptionPara = toDoDescription.querySelector("#descriptionPara"); 
-                    //to modify a child's content using parent element
+        //             let toDoDescription = document.getElementsByClassName("description")[0];
+        //             console.log(toDoDescription);
+        //             let descriptionPara = toDoDescription.querySelector("#descriptionPara"); 
+        //             //to modify a child's content using parent element
                
-                    descriptionPara.textContent=tasks[0].task;
+        //             descriptionPara.textContent=tasks[0].task;
                 
 
-                    tasks.slice(1).map((value)=>{
+        //             tasks.slice(1).map((value)=>{
                         
-                        addBox(value.task);
-                    });
-            }
+        //                 addBox(value.task);
+        //             });
+        //     }
 
-        }
+        // }
 
-        checkArray(1);
+        // checkArray(1);
         
-        const button = document.getElementById("submit");
-        console.log(button);
-        button.addEventListener("click",getTaskContent); 
+        // const button = document.getElementById("submit");
+        // console.log(button);
+        // button.addEventListener("click",getTaskContent); 
 
     </script>
 </body>
