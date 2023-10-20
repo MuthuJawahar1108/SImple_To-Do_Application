@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="assets/style.css">
     
     <title>Todo</title>
+    
 </head>
 <body>
     <div class="heading" >
@@ -44,8 +45,19 @@
         <!-- <div class="add-button">+</div> -->
     </div>
     <script>
-        let tasks = [{"_id":1,"task":"Get ready for college","status":0},
-        {"_id":2,"task":"Get ready for home","status":1}];
+        let index = 0;
+        let tasks=[];
+        function updateLocalStorage(){
+            console.log(JSON.stringify(tasks));
+            localStorage.setItem("tasks",JSON.stringify(tasks));
+        }
+
+        //Load tasks from local storage
+        const storedTasks = localStorage.getItem("tasks");
+        console.log(storedTasks);
+        if(storedTasks) tasks = JSON.parse(storedTasks);
+        // let tasks = [{"_id":1,"task":"Get ready for college","status":0},
+        // {"_id":2,"task":"Get ready for home","status":1}];
 
         const boxContainer = document.getElementsByClassName("boxes-container")[0];
 
@@ -71,6 +83,7 @@
                     checkbox.checked = true;
                 } 
                 boxContainer.appendChild(boxClone);
+
         } 
 
         if(tasks.length===0){
@@ -78,6 +91,7 @@
             boxContainer.appendChild(hiddenText);
         }
         else{
+            // hiddenText.textContent="";
             tasks.forEach((task)=>{
                 createBox(task);
             })
@@ -87,10 +101,17 @@
         let submit = document.getElementById("submit");
 
         submit.addEventListener("click",()=>{
-            let newTask = {"_id":3,"task":taskbox.value,"status":1};
+            // boxContainer.remove(hiddenText);
+            hiddenText.style.display="none";
+            index+=1
+            let newTask = {"_id":index,"task":taskbox.value,"status":1};
             tasks.push(newTask);
+            console.log(tasks);
             createBox(newTask);
             taskbox.value="";
+
+            updateLocalStorage();
+
         })
 
         boxContainer.addEventListener("change",(event)=>{
@@ -106,6 +127,9 @@
                     currentTask.style.color="grey";
                 }
             }
+
+            updateLocalStorage();
+
             
         });
         boxContainer.addEventListener("click",(event)=>{
@@ -119,8 +143,11 @@
                 console.log(tasks)
                 currentBox.remove();
                 if(tasks.length===0){
-                    boxContainer.appendChild(hiddenText);
+                    hiddenText.style.display="";
+                    // boxContainer.appendChild(hiddenText);
                 }
+                updateLocalStorage();
+
             }
         })
     </script>
