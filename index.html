@@ -13,7 +13,8 @@
         <p>To-Do for you!</p>
     </div>
     <div class="boxes-container" >
-        <p>Tasks to complete</p>
+        <img src="./assets/images/task.png" alt="task">
+        <p>Your Tasks </p>
         <template id="hiddenTextTemplate">
             <p class="hiddenText" id="hiddenText"></p>
         </template>
@@ -37,6 +38,7 @@
             <input type="text" name="titlebox" id="">
         </div> -->
         <!-- <div class="task-container"> -->
+            <img src="./assets/images/new-task.png" alt="add-task">
             <p>Add new task!</p>
             <textarea name="taskbox" id="taskbox" cols="30" rows="10"></textarea>
             <button class="submit" id="submit">Add</button>
@@ -124,7 +126,7 @@
                 foundTask.status=0;
                 if(foundTask.status===0) {
                     currentTask.style.textDecoration = "line-through";
-                    currentTask.style.color="grey";
+                    currentTask.style.color="#8f8f8f";
                 }
             }
 

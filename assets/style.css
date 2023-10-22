@@ -1,130 +1,183 @@
-*{
-    padding: 0px;
-    margin: 0px;
+* {
+    padding: 0;
+    margin: 0;
     box-sizing: border-box;
-    font-family: "Fira Sans",sans-serif;
-}
-
-:root{
-    --primary: #d81e5b;
-    --secondary: #8a4efc;
-    --light: #eee;
-    --light-alt: #61759b;
-    --dark: #131a26;
-    --dark-alt: #202B3E;
+    font-family: "Fira Sans", sans-serif;
   }
-
-body{
-    background-color: var(--dark-alt);
-    color: var(--light);
-}
-
-.heading{
-    
-    font-size: 40px;
-    padding: 10px;
+  
+  :root {
+    --primary: #408df9; 
+    --primary-text: #522a9b;
+    --secondary: #b544da; 
+    --light: #F0F0F0; /* Light grayish background */
+    --dark: #A9C1E2; /* Light blue background */
+    --dark-alt: #ffffff; /* Slightly darker gray background */
+    --text: #2a2a2a; /* Dark text color */
+  
+    /* Nature-inspired fonts with a touch of elegance */
+    --heading-font: "Poppins", serif;
+    --body-font: "Poppins", sans-serif;
+  }
+  
+  body {
+    background-image: url('images/5765426_2977005.jpg');
+    background-size: cover; /* Adjusts the image size to cover the entire screen */
+    background-position: center center;
+    /* background-color: var(--light); */
+    color: var(--text);
+    font-family: var(--body-font);
+  }
+  
+  .heading {
+    font-size: 36px;
+    padding: 20px 0;
     text-align: center;
-    font-weight: 50;
-
-}
-
-.boxes-container{
-    padding: 10px;
-    margin: 10px;
-    background-color: var(--dark);
-    border-radius: 10px;
-}
-.boxes-container>p{
-    margin:20px;
-    text-align: center;
-    font-size: 23px;
-}
-.boxes-container .box{
-    /* width: 100%; */
-    padding: 10px;
-    display: flex;
-    border-radius: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    justify-content:space-between ;
-    align-items: center;
+    font-weight: bold;
+    font-family: var(--heading-font);
+    color: var(--primary-text);
+  }
+  
+  .boxes-container {
+    position: relative;
+    padding: 20px;
+    width: 75%;
+    margin: 10px auto;
     background-color: var(--dark-alt);
-    /* display: none; */
-}
-.boxes-container .hiddenText{
-    font-size: 15px;
-    /* display: none; */
-    
-}
-.boxes-container .box .description{
-    display: flex;
-    align-items: center;
-}
-
-.description .round{
-    margin-left: 5px;
-    height: 17px;
-    width: 17px;
     border-radius: 15px;
-    background-image: linear-gradient(to right,var(--primary),var(--secondary));
-}
-.description p{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* ... (continue with the rest of your CSS styles) */
+  
+  
+  .boxes-container img{
+    image-rendering: crisp-edges;
+    height:50px;
+    width: 50px;
+    position: absolute;
+    top:15px;
+    left: 10px;
+  }
+ 
+  
+  
+  .boxes-container > p {
+    /* margin: 20px; */
+    margin:20px 0px 20px 20px;
+    text-align: center;
+    font-weight: 550;
+    font-size: 20px;
+    color: var(--primary-text);
+  }
+  
+  .boxes-container .box {
+    padding: 20px;
+    display: flex;
+    border-radius: 10px;
+    margin: 10px 20px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .boxes-container .hiddenText {
+    font-size: 15px;
+    color: var(--text);
+  }
+  
+  .boxes-container .box .description {
+    display: flex;
+    align-items: center;
+  }
+  
+  .description .round {
     margin-left: 10px;
-    font-size: 17px;
-    margin-right: 10px;
-}
-.box .controls{
-    /* border: 1px solid; */
+    height: 19px;
+    width: 19px;
+    border-radius: 50%;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+  }
+  
+  .description p {
+    margin-left: 15px;
+    font-size: 18px;
+    font-weight:550;
+    /* color: var(--text); */
+  }
+  
+  .box .controls {
     display: flex;
     padding: 10px;
-    gap:15px;
-}
-.controls #isDone{
-    height:20px;
+    gap: 15px;
+  }
+  
+  .controls #isDone {
+    height: 20px;
     width: 20px;
-}
-.controls .cancel{
-    height:20px;
+    border-style: none;
+    cursor: pointer;
+  }
+  
+  .controls .cancel {
+    height: 20px;
     width: 20px;
-    background-color: red;
-    border-radius: 20px;
-    cursor:pointer;
-}
-
-.new-todo_container{
-    margin: 10px;
-    border-radius: 10px;
-    background-color: var(--dark);
-    padding:10px;
+    background-color: #ff5555; /* Red color for cancel button */
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .new-todo_container {
+    position: relative;
+    width: 75%;
+    margin: 10px auto;
+    border-radius: 15px;
+    background-color: var(--dark-alt);
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.new-todo_container p{
-    margin:20px;
-    text-align: center;
-    font-size: 23px;
-}
-.new-todo_container textarea{
-    width:75%;
-    padding: 10px;
-    background-color: var(--dark-alt);
-    color: white;
-    /* border-style: none; */
-    border-radius: 10px;
-    /* border-color:#0a00c387; */
-    border-color: var(--dark-alt);
-    border-width: 2px;
-}
-.new-todo_container button{
-    border-style: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .new-todo_container img{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 15px;
+  }
+  .new-todo_container p {
     margin: 20px;
-    padding: 10px 30px; 
-    border-radius: 30px;
-    color: white;
-    cursor: pointer;
-    font-size: 15px;
+    text-align: center;
     font-weight: 550;
-    background-image: linear-gradient(to right,var(--primary),var(--secondary));
-}
+    font-size: 20px;
+    color: var(--primary-text);
+  }
+  
+  .new-todo_container textarea {
+    width: 75%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: var(--dark);
+    color: black;
+    font-size: 16px;
+    border-style: none;
+    /* border: 2px solid var(--primary); */
+    border-radius: 10px;
+    font-weight: 550;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .new-todo_container button {
+    border: none;
+    margin: 20px;
+    padding: 12px 30px;
+    border-radius: 30px;
+    color: var(--light);
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+  }
+  
