@@ -17,7 +17,7 @@ The code is present in the version-1.1 branch.
 # Project Structure
 1. index.html : The HTML file that contains the structure of the Todo list interface.
 2. style.css : The CSS file for styling the page.
-3. script.ja : The Javascript file that handles the task management and local storage integration.
+3. script.js : The Javascript file that handles the task management and local storage integration.
 
 # Getting Started
 1. Clone the repository to your local machine.
