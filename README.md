@@ -3,6 +3,8 @@ This project is a simple web application that allows users to manage their tasks
 The project is built using HTML, CSS and Javascript.
 The code is present in the version-1.1 branch.
 
+Netlify Link : https://iridescent-cuchufli-a733a3.netlify.app/
+
 # Features
 1. Users can add new tasks, mark them as complete and delete the tasks they no longer need.
 2. Completed tasks are visually marked with a strikethrough and a color change for easy identification.
